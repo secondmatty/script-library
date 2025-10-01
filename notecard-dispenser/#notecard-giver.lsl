@@ -77,24 +77,27 @@ showGiverMenu(key id)
         GIVER_MENU_TEXT += llList2String(ITEMS,x) + " = " + llList2String(GIVER_NOTECARD_NAMES, (integer)llList2String(ITEMS,x)-1 ) + "\n";
     }
         
-    list NAV;
+    list NAV = [];
     
-    if (GIVER_PAGE > 1)
+    if (GIVER_PAGES > 1) 
     {
-        NAV += ["<<"];
-    } else
-    {
+        if (GIVER_PAGE > 1)
+        {
+            NAV += ["<<"];
+        } else
+        {
+            NAV += [" "];
+        }
+        
         NAV += [" "];
-    }
-    
-    NAV += [" "];
-    
-    if (GIVER_PAGE < GIVER_PAGES)
-    {
-        NAV += [">>"];
-    } else
-    {
-        NAV += [" "];
+        
+        if (GIVER_PAGE < GIVER_PAGES)
+        {
+            NAV += [">>"];
+        } else
+        {
+            NAV += [" "];
+        }
     }
 
     llDialog(id, GIVER_MENU_TEXT, NAV + ITEMS, GIVER_CHANNEL);
