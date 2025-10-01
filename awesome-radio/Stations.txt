@@ -1,0 +1,6 @@
+181.fm Awesome 80s = http://relay3.181.fm:8000
+181.fm Lite 80s = http://relay3.181.fm:8040
+181.fm 80's Hairband = http://relay2.181.fm:8014
+RadioTunes Best of the 80s = http://pub9am.radiotunes.com:80/radiotunes_the80s
+RadioTunes 80's Rock = http://pub9am.radiotunes.com:80/radiotunes_80srock
+RadioTunes 80's Dance = http://pub9am.radiotunes.com:80/radiotunes_80sdance
