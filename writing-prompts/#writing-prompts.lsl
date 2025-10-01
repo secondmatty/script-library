@@ -6,7 +6,7 @@
 string  PROMPT_NOTECARD = "Prompts";
 
 
-// ====== Script starts here, don't change anything beyond this line =======
+// ====== SCript starts here, don't change anything beyond this line =======
 /*
 
     Script Name: Writing Prompts
@@ -33,7 +33,6 @@ key     PROMPT_QUERYID;              // query id for notecard query
 integer PROMPT_LINE = 0;             // current notecard line
 integer PROMPT_COUNT = 0;            // total notecard line count
 integer PROMPT_INITIALIZED = 0;      // initialization flag
-list    RANDOMIZED_LIST = [];
 
 list shift_left(list mylist) {
     integer len = llGetListLength(mylist);
@@ -46,9 +45,12 @@ list shift_left(list mylist) {
     return [];
 }
 
-giveRandomPrompt() {
-    llSay(0, llList2String(PROMPT_LIST, 0));
-    PROMPT_LIST=shift_left(PROMPT_LIST);
+issue_prompt() {
+    if(PROMPT_INITIALIZED==1)
+    {
+        llSay(0, llList2String(PROMPT_LIST, 0));
+        PROMPT_LIST=shift_left(PROMPT_LIST);
+    }
 }
 
 initialize()
@@ -59,14 +61,14 @@ initialize()
     PROMPT_INITIALIZED = 0;
     PROMPT_COUNT = 0;
 
-    // Query for notecards
+    // Query for notecard
     PROMPT_QUERYID = llGetNotecardLine(PROMPT_NOTECARD, PROMPT_LINE);
 }
 
-giver_finished()
+initialize_finished()
 {
     llOwnerSay("Found " + (string)PROMPT_COUNT + " prompts."); 
-    PROMPT_INITIALIZED=1;
+    PROMPT_INITIALIZED = 1;
     PROMPT_LIST = llListRandomize(PROMPT_LIST, 0);
     llMessageLinked(LINK_THIS, 0, "GIVER_FINISHED", NULL_KEY);
 }
@@ -91,7 +93,7 @@ default
                 // increase line index and read next TV_NOTECARD line             
                 ++PROMPT_LINE;
                 PROMPT_QUERYID = llGetNotecardLine(PROMPT_NOTECARD, PROMPT_LINE);
-            }   else giver_finished(); // eof reached before the 10th valid line
+            }   else initialize_finished(); // eof reached before the 10th valid line
         }
     } 
     
@@ -99,6 +101,6 @@ default
     link_message(integer sender_num, integer num, string str, key id)
     {
         if      (str=="INITIALIZE") initialize();
-        else if (str=="GIVE") giveRandomPrompt();
+        else if (str=="TOUCH")      issue_prompt();
     }
 }
