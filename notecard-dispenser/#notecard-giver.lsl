@@ -3,7 +3,6 @@
 // This is the message displayed in the dialogue box.
 string GIVER_WELCOME = "Please choose a notecard.";
 
-
 // ====== Script starts here. Don't change anything beyond this line ======//
 /*  
     Script Name: Notecard giver
@@ -14,12 +13,13 @@ string GIVER_WELCOME = "Please choose a notecard.";
     all notecards found to the user who triggered the event.
     Supports pagination and will re-scan the inventory on demand.
     
-    Auhtor: Matt Briar (mattbriar), mattbriar.resident@gmail.com
-    
-    This script is distributed under CC BY License. You may distribute, 
-    remix, adapt, and build upon the material in any medium or format, 
-    so long as attribution is given to the creator. The license allows
-    for commercial use.
+    Copyright (c) 2025 Matt Briar, https://github.com/secondmatty
+
+    This script is distributed under the MIT License. You are free
+    to use, copy, modify, merge, publish, distribute, sublicense, 
+    and/or sell copies of the software, provided the license and
+    copyright notice are included in all copies or substantial 
+    portions of the software.
     
     Version History:
         10/01/2025: Initial 

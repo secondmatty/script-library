@@ -5,6 +5,11 @@
 // will be served.
 string  PROMPT_NOTECARD = "Prompts";
 
+//  Sound to play when prompt is given. Set to "" to disable sound effect
+string SOUND_EFFECT = "slapscream";
+
+//  Volume of the sound. Valid values are between 0.0 (inaudible) and 1.0 (full volume)
+float  SOUND_VOLUME = 1.0;
 
 // ====== SCript starts here, don't change anything beyond this line =======
 /*
@@ -15,12 +20,13 @@ string  PROMPT_NOTECARD = "Prompts";
     Reads a list of writing prompts from a notecard and issues 
     a random one into the local chat every time someone clicks the prim.
     
-    Auhtor: Matt Briar (mattbriar), mattbriar.resident@gmail.com
-    
-    This script is distributed under CC BY License. You may distribute, 
-    remix, adapt, and build upon the material in any medium or format, 
-    so long as attribution is given to the creator. The license allows
-    for commercial use.
+    Copyright (c) 2025 Matt Briar, https://github.com/secondmatty
+
+    This script is distributed under the MIT License. You are free
+    to use, copy, modify, merge, publish, distribute, sublicense, 
+    and/or sell copies of the software, provided the license and
+    copyright notice are included in all copies or substantial 
+    portions of the software.
     
     Version History:
         10/01/2025: Initial 
@@ -46,10 +52,13 @@ list shift_left(list mylist) {
 }
 
 issue_prompt() {
-    if(PROMPT_INITIALIZED==1)
-    {
-        llSay(0, llList2String(PROMPT_LIST, 0));
-        PROMPT_LIST=shift_left(PROMPT_LIST);
+    if(PROMPT_INITIALIZED!=1) return;
+    
+    llSay(0, llList2String(PROMPT_LIST, 0));
+    PROMPT_LIST=shift_left(PROMPT_LIST);
+    
+    if (SOUND_EFFECT != "") {
+        llPlaySound(SOUND_EFFECT, SOUND_VOLUME);
     }
 }
 
