@@ -1,10 +1,9 @@
 # Matt's LSL Script Collection
 
-## Liucense
+## License
 This scripts in this repository are  distributed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) license. You may distribute, 
 remix, adapt, and build upon the material in any medium or format, so long as attribution 
-is given to the creator. The license allows  for commercial use.
-    
+is given to the creator. The license allows for commercial use. See [LICENSE](LICENSE) for details.    
 
 ## What's in the box
 | Script  | Purpose  |
