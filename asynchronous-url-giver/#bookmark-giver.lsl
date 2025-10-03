@@ -19,7 +19,7 @@ string  CONFIRMATION_TEXT = "The selected URL will be delivered to your local ch
 // ====== SCript starts here, don't change anything beyond this line =======
 /*
 
-    Script Name: Bookmark Dispenser
+    Script Name: Bookmark Giver
     
     Description: 
     Reads a list of Bookmarks from a notecard in the inventory of the 
@@ -85,14 +85,12 @@ list NOTOFICATION_QUEUE = [];
 
 push_notification(string text, key id) 
 {
-    // llOwnerSay("DEBUG: Pushing notification: " + (string)id+"|"+text);
     NOTOFICATION_QUEUE += (string)id+"|"+text;
     llMessageLinked(LINK_THIS,0, "NEW_NOTIFICATION", "");
 }
 
 string pull_notification() 
 {
-    // llOwnerSay("DEBUG: Pulling notification"); 
     if(llGetListLength(NOTOFICATION_QUEUE) > 0)
     {
         string firstItem = llList2String(NOTOFICATION_QUEUE, 0);
@@ -243,7 +241,6 @@ default
             string notification = pull_notification();
             string recipient = llGetSubString(notification, 0, 35);
             string payload = llGetSubString(notification, 37, -1);
-            // llOwnerSay("DEBUG: triggering notification. Recipient=" + recipient + ", payload=" + payload);
             if (notification != "") llMessageLinked(LINK_THIS, 1, payload, (key)recipient);
         }        
     }

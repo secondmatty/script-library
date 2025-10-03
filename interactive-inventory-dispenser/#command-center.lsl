@@ -4,7 +4,7 @@
 integer GROUP_ONLY_MODE=0;
 
 
-// ====== SCript starts here, don't change anything beyond this line =======
+// ====== Script starts here, don't change anything beyond this line =======
 /*
 
     Script Name: Command Center
@@ -41,9 +41,10 @@ initialize()
 }
 
 
-initStatus()
+update_initilization_status()
 {
-        if (GIVER_INITIALIZED == 1)
+    // notify user once all submodules are initialized
+    if (GIVER_INITIALIZED == 1)
         llOwnerSay("Initialization finished.");
 }
 
@@ -89,7 +90,12 @@ default
 
     link_message(integer sender_num, integer num, string str, key id)
     {
-        if (str=="GIVER_FINISHED") {GIVER_INITIALIZED = 1; initStatus();}
+        if (str=="GIVER_FINISHED")
+        {
+            // Item giver is done initializing.
+            GIVER_INITIALIZED = 1; 
+            update_initilization_status();
+        }
         else if (str=="reset_request") initialize();
     }
     

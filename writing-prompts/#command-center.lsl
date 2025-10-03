@@ -3,7 +3,6 @@
 //  Set this to 1 if only owner and group should be served
 integer GROUP_ONLY_MODE=0;
 
-
 // ====== Script starts here, don't change anything beyond this line =======
 /*
 
@@ -23,7 +22,7 @@ integer GROUP_ONLY_MODE=0;
     and/or sell copies of the software, provided the license and
     copyright notice are included in all copies or substantial 
     portions of the software.
-    
+
     Version History:
         10/01/2025: Initial 
     
@@ -41,9 +40,10 @@ initialize()
 }
 
 
-initStatus()
+update_initialization_status()
 {
-        if (GIVER_INITIALIZED == 1)
+    // notify user once all submodules are initialized
+    if (GIVER_INITIALIZED == 1) 
         llOwnerSay("Initialization finished.");
 }
 
@@ -68,12 +68,12 @@ default
         if (GROUP_ONLY_MODE == 1) {
             if (id == llGetOwner() || llSameGroup(id))
             {
-                llMessageLinked(LINK_THIS,0, "GIVE", id);
+                llMessageLinked(LINK_THIS,0, "TOUCH", id);
             } else {
                 llDialog(id, "\n\nSorry but you are not allowed to operate this device", [], -9999987);
             }
         } else {
-             llMessageLinked(LINK_THIS,0, "GIVE", id);
+             llMessageLinked(LINK_THIS,0, "TOUCH", id);
         }
     }
 
@@ -89,8 +89,13 @@ default
 
     link_message(integer sender_num, integer num, string str, key id)
     {
-        if (str=="GIVER_FINISHED") {GIVER_INITIALIZED = 1; initStatus();}
-        else if (str=="reset_request") initialize();
+        if (str=="GIVER_FINISHED") {
+            // Prompt giver is done initializing.
+            GIVER_INITIALIZED = 1; 
+            update_initialization_status();
+        }
+        else if (str=="RESET_REQUEST") 
+            initialize();
     }
     
     timer()
