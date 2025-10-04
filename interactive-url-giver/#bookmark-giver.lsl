@@ -8,7 +8,7 @@ string  BOOKMARK_NOTECARD = "Bookmarks"; // config file
 // Message will be displayed in the pop-up dialog.
 string  DIALOG_PROMPT = "This shelf will give you bookmarks to releases of some of our authors. Choose an item to receive a bookmark to the author's work in your local chat window";
 
-// ====== SCript starts here, don't change anything beyond this line =======
+// ====== Script starts here, don't change anything beyond this line =======
 /*
 
     Script Name: Bookmark Giver
