@@ -1,19 +1,4 @@
-// ===== Configuration section. Feel free to alter these settings ======
-
-// Name of the config file to read. You can have multiple in the inventory
-// e.g. for different topics but only the prompts stored in THIS notecard
-// will be served.
-string  PROMPT_NOTECARD = "Prompts";
-
-//  Sound to play when prompt is given. Set to "" to disable sound effect
-string SOUND_EFFECT = "slapscream";
-
-//  Volume of the sound. Valid values are between 0.0 (inaudible) and 1.0 (full volume)
-float  SOUND_VOLUME = 1.0;
-
-// ====== SCript starts here, don't change anything beyond this line =======
 /*
-
     Script Name: Writing Prompts
     
     Description: 
@@ -29,9 +14,23 @@ float  SOUND_VOLUME = 1.0;
     portions of the software.
     
     Version History:
-        10/01/2025: Initial 
-    
+        10/01/2025.1: Initial 
 */
+// ====== Configuration section. Feel free to alter these settings ======
+
+// Name of the config file to read. You can have multiple in the inventory
+// e.g. for different topics but only the prompts stored in THIS notecard
+// will be served.
+string  PROMPT_NOTECARD = "Prompts";
+
+//  Sound to play when prompt is given. Set to "" to disable sound effect
+string SOUND_EFFECT = "slapscream";
+
+//  Volume of the sound. Valid values are between 0.0 (inaudible) and 1.0 (full volume)
+float  SOUND_VOLUME = 1.0;
+
+
+// ===== SCript starts here, don't change anything beyond this line =====
 
 integer PROMPT_CHANNEL;
 list    PROMPT_LIST = [];           // list of prompts

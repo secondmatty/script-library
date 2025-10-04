@@ -1,11 +1,4 @@
-// ===== Configuration section. Feel free to alter these settings ======//
-
-//  Set this to 1 if only owner and group should be served
-integer GROUP_ONLY_MODE=0;
-
-// ====== Script starts here, don't change anything beyond this line =======
 /*
-
     Script Name: Command Center
     
     Description: 
@@ -24,9 +17,15 @@ integer GROUP_ONLY_MODE=0;
     portions of the software.
 
     Version History:
-        10/01/2025: Initial 
-    
+        10/01/2025.1: Initial 
 */
+// ====== Configuration section. Feel free to alter these settings ======
+
+//  Set this to TRUE if only owner and group should be served
+integer GROUP_ONLY_MODE=FALSE;
+
+
+// ===== Script starts here, don't change anything beyond this line =====
 
 integer CHANNEL;
 integer GIVER_INITIALIZED=0;
@@ -43,7 +42,7 @@ initialize()
 update_initialization_status()
 {
     // notify user once all submodules are initialized
-    if (GIVER_INITIALIZED == 1) 
+    if (GIVER_INITIALIZED == TRUE) 
         llOwnerSay("Initialization finished.");
 }
 
@@ -63,9 +62,10 @@ default
 
     touch_start(integer total_number)
     {
-        if (GIVER_INITIALIZED!=1) return;
+        if (GIVER_INITIALIZED != TRUE) return;
+        
         key id = llDetectedKey(0);
-        if (GROUP_ONLY_MODE == 1) {
+        if (GROUP_ONLY_MODE == TRUE) {
             if (id == llGetOwner() || llSameGroup(id))
             {
                 llMessageLinked(LINK_THIS,0, "TOUCH", id);
@@ -91,7 +91,7 @@ default
     {
         if (str=="GIVER_FINISHED") {
             // Prompt giver is done initializing.
-            GIVER_INITIALIZED = 1; 
+            GIVER_INITIALIZED = TRUE; 
             update_initialization_status();
         }
         else if (str=="RESET_REQUEST") 
