@@ -1,24 +1,4 @@
-// ===== Configuration section. Feel free to alter these settings ======//
-
-// Tell the script which Notecard to retrieve the bookmarks from. 
-// You can have multiple boookmar notecards in the inventory of the shelf,
-// changing this setting allows for example to switch betweeen seasonal notecards 
-string  BOOKMARK_NOTECARD = "Bookmarks"; // config file
-
-// Message will be displayed in the pop-up dialog.
-string  DIALOG_PROMPT = "This shelf will give you bookmarks to releases of some of our authors. Choose an item to receive a bookmark to the author's work in your local chat window";
-
-// This text will be put in front of the (Name): (Url) output in local chat
-string  NOTIFICATION_PREFIX = "Here is your link to ";
-
-// This text will be displayed after the user has picked an item
-// Change this to "" to disable the additional pop-up dialog entirely.
-string  CONFIRMATION_TEXT = "The selected URL will be delivered to your local chat window shorty.";
-
-
-// ====== SCript starts here, don't change anything beyond this line =======
 /*
-
     Script Name: Bookmark Giver
     
     Description: 
@@ -37,9 +17,27 @@ string  CONFIRMATION_TEXT = "The selected URL will be delivered to your local ch
     portions of the software.
     
     Version History:
-        10/03/2025: Initial 
-    
+        10/03/2025.1: Initial 
 */
+// ====== Configuration section. Feel free to alter these settings ======
+
+// Tell the script which Notecard to retrieve the bookmarks from. 
+// You can have multiple boookmar notecards in the inventory of the shelf,
+// changing this setting allows for example to switch betweeen seasonal notecards 
+string  BOOKMARK_NOTECARD = "Bookmarks"; // config file
+
+// Message will be displayed in the pop-up dialog.
+string  DIALOG_PROMPT = "This shelf will give you bookmarks to releases of some of our authors. Choose an item to receive a bookmark to the author's work in your local chat window";
+
+// This text will be put in front of the (Name): (Url) output in local chat
+string  NOTIFICATION_PREFIX = "Here is your link to ";
+
+// This text will be displayed after the user has picked an item
+// Change this to "" to disable the additional pop-up dialog entirely.
+string  CONFIRMATION_TEXT = "The selected URL will be delivered to your local chat window shorty.";
+
+
+// ===== Script starts here, don't change anything beyond this line =====
 
 string  SEPARATOR = "=";            // character to separate title from URL
 integer GIVER_CHANNEL;

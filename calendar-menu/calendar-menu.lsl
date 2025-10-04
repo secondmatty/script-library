@@ -1,22 +1,4 @@
-// ===== Configuration section. Feel free to alter these settings ======
-
-// Specify up to three calendars by Name and URL
-list CALENDAR_NAMES=["MELD","FCC","Realm"];
-list CALENDAR_BASE_URLS=[
-    "https://calendar.google.com/calendar/u/0/embed?src=1f51b7dd1a046b95184855b6dae000d658b433157231877fdc58cfc2668a8143@group.calendar.google.com",
-    "https://calendar.google.com/calendar/u/0/embed?src=fccinsl@gmail.com",
-    "https://calendar.google.com/calendar/u/0/embed?src=0027412020c76c7b253e5fef4ef8d3b5d8afa11eaf855b5c05486a8635d138ac@group.calendar.google.com"];
-
-// Specify up to three timezones by Name and TZ value
-list TIMEZONE_NAMES = ["SLT", "CET"];
-list TIMEZONES = ["America/Los_Angeles", "Europe/Berlin"];
-
-// Amount of seconds the dialog listener should be active
-float DIALOG_TIMEOUT = 60.0;
-
-// ====== Script starts here, don't change anything beyond this line =======
 /*
-
     Script Name: Calendar Menu
     
     Description: 
@@ -32,10 +14,31 @@ float DIALOG_TIMEOUT = 60.0;
     portions of the software.
     
     Version History:
-        10/04/2025: Initial 
-    
+        10/04/2025.1: Initial 
 */
 
+// ===== Configuration section. Feel free to alter these settings ======
+
+// Specify up to three calendars by Name and URL
+list CALENDAR_NAMES=["MELD","FCC","Realm"];
+list CALENDAR_BASE_URLS=[
+    "https://calendar.google.com/calendar/u/0/embed?src=1f51b7dd1a046b95184855b6dae000d658b433157231877fdc58cfc2668a8143@group.calendar.google.com",
+    "https://calendar.google.com/calendar/u/0/embed?src=fccinsl@gmail.com",
+    "https://calendar.google.com/calendar/u/0/embed?src=0027412020c76c7b253e5fef4ef8d3b5d8afa11eaf855b5c05486a8635d138ac@group.calendar.google.com"
+    ];
+
+// Specify up to three timezones by Name and TZ value
+list TIMEZONE_NAMES = ["SLT", "CET"];
+
+// TZ identifier for each zone. A list of all timezones and 
+// their specification acn be found here:
+// https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+list TIMEZONES = ["America/Los_Angeles", "Europe/Berlin"];
+
+// Amount of seconds the dialog listener should be active
+float DIALOG_TIMEOUT = 60.0;
+
+// ====== Script starts here, don't change anything beyond this line =======
 
 integer CHANNEL;
 integer LISTEN_HANDLE = -1;
@@ -49,13 +52,44 @@ show_dialog(key id)
 {
     if (LISTEN_HANDLE == -1); LISTEN_HANDLE = llListen(CHANNEL, "", "", "");
     llSetTimerEvent(DIALOG_TIMEOUT);
-    llDialog(id, "Current Timezone: "+ CURRENT_TIMEZONE, CALENDAR_MENU + TIMEZONE_NAMES , CHANNEL);
+    llDialog(id, "Current Timezone: "+ CURRENT_TIMEZONE_NAME, CALENDAR_MENU + TIMEZONE_NAMES , CHANNEL);
+}
+
+integer verify_configuration()
+{
+    if (llGetListLength(CALENDAR_NAMES) > 3 || llGetListLength(CALENDAR_BASE_URLS) > 3)
+    {
+        llOwnerSay("Configuration Error: To many calendars. This calendar menu supports a maximum of 3 calendars");
+        return FALSE; 
+    }
+
+    if (llGetListLength(CALENDAR_NAMES) != llGetListLength(CALENDAR_BASE_URLS))
+    {
+        llOwnerSay("Configuration Error: Number of calendar names and URLs doesn't match");
+        return FALSE; 
+    }
+
+    if (llGetListLength(TIMEZONE_NAMES) > 3 || llGetListLength(TIMEZONES) > 3)
+    {
+        llOwnerSay("Configuration Error: To many timezones. This calendar menu supports a maximum of 3 timezones");
+        return FALSE; 
+    }
+
+    if (llGetListLength(TIMEZONE_NAMES) != llGetListLength(TIMEZONES))
+    {
+        llOwnerSay("Configuration Error: Number of timezones names and TZ identifiers doesn't match");
+        return FALSE; 
+    }
+
+    return TRUE;
 }
 
 default
 {
     state_entry()
     {
+        if (verify_configuration()==FALSE) return;
+        
         string CET = "&ctz=Europe/Berlin";
         string SLT = "&ctz=America/Los_Angeles";
         string AGENDA = "&mode=agenda";
@@ -86,6 +120,7 @@ default
         
         CHANNEL = (((integer)("0x"+llGetSubString((string)llGetKey(),-8,-1)) & 0x3FFFFFFF) ^ 0xBFFFFFFF)-3; 
         
+        llOwnerSay("Calendar menu ready.");
     }
 
     touch_start(integer total_number)

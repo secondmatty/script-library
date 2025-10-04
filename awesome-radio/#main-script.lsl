@@ -17,13 +17,13 @@
     portions of the software.
     
     Version History:
-        10/01/2025: Initial 
+        10/01/2025.1: Initial 
     
 */
 
 integer CHANNEL;           // dialog channel
 
-integer RADIO_INITIALIZED=0;
+integer RADIO_INITIALIZED = FALSE;
 
 initialize()
 {
@@ -34,15 +34,11 @@ initialize()
 
 }
 
-
-initStatus()
+update_initilization_status()
 {
-        if (RADIO_INITIALIZED == 1)
-        llOwnerSay("Initialization finished.");
+        if (RADIO_INITIALIZED == TRUE)
+            llOwnerSay("Initialization finished.");
 }
-
-
-
 
 default
 {
@@ -53,7 +49,6 @@ default
         llListen(CHANNEL, "", NULL_KEY, "");
     }
     
-    // reset the script when the DVD is rezed.
     on_rez(integer start_param)
     {
         llResetScript();   
@@ -61,10 +56,12 @@ default
 
     touch_start(integer total_number)
     {
+        if (RADIO_INITIALIZED == FALSE) return;
+
         key id = llDetectedKey(0);
         if (id == llGetOwner() || llSameGroup(id))
         {
-            if (RADIO_INITIALIZED==1) llMessageLinked(LINK_THIS,0, "RADIO", id);
+            llMessageLinked(LINK_THIS,0, "RADIO", id);
         } else {
             llDialog(id, "\n\nSorry but you are not allowed to operate this device", [], -9999987);
         }
@@ -82,7 +79,10 @@ default
 
     link_message(integer sender_num, integer num, string str, key id)
     {
-        if (str=="RADIO_FINISHED") {RADIO_INITIALIZED = 1; initStatus();}
+        if (str=="RADIO_FINISHED") {
+            RADIO_INITIALIZED = TRUE;
+            update_initilization_status(); 
+        }
         else if (str=="reset_request") initialize();
     }
     

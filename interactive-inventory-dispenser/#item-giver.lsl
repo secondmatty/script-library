@@ -1,15 +1,3 @@
-// ===== Configuration section. Feel free to alter these settings ======//
-
-// This is the message displayed in the dialogue box.
-string GIVER_WELCOME = "Please choose a notecard.";
-
-// Specify which kind of item this dispenser should look for in it's inventory
-// INVENTORY_OBJECT = Objects
-// INVENTORY_NOTECARD = Notecards
-// INVENTORY_LANDMARK = Landmarks
-integer ITEM_TYPE = INVENTORY_NOTECARD;
-
-// ====== Script starts here. Don't change anything beyond this line ======//
 /*  
     Script Name: Item giver
     
@@ -28,8 +16,21 @@ integer ITEM_TYPE = INVENTORY_NOTECARD;
     portions of the software.
     
     Version History:
-        10/01/2025: Initial 
+        10/01/2025.1: Initial 
 */
+// ====== Configuration section. Feel free to alter these settings ======
+
+// This is the message displayed in the dialogue box.
+string GIVER_WELCOME = "Please choose a notecard.";
+
+// Specify which kind of item this dispenser should look for in it's inventory
+// INVENTORY_OBJECT = Objects
+// INVENTORY_NOTECARD = Notecards
+// INVENTORY_LANDMARK = Landmarks
+integer ITEM_TYPE = INVENTORY_NOTECARD;
+
+
+// ===== Script starts here. Don't change anything beyond this line =====
 
 integer GIVER_CHANNEL;
 list    GIVER_MENU_ITEMS = [];      // Notecard menu items

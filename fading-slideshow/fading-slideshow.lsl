@@ -1,13 +1,4 @@
-// ===== Configuration section. Feel free to alter these settings ======//
-
-float   slide_time     =   30.0;   
-float   fade_speed     =   0.01;   
-integer texture_face   =   0;      
-
-
-// ====== Script starts here, don't change anything beyond this line =======
 /*
-
     Script Name: fading-slideshow.lsl
     
     Description: 
@@ -23,9 +14,16 @@ integer texture_face   =   0;
     portions of the software.
     
     Version History:
-        10/01/2025: Initial 
-    
+        10/01/2025.1: Initial 
 */
+// ====== Configuration section. Feel free to alter these settings ======
+
+float   slide_time     =   30.0;   
+float   fade_speed     =   0.01;   
+integer texture_face   =   0;      
+
+
+// ===== Script starts here, don't change anything beyond this line =====
 
 list    texture_list;    
 integer texture_total;   
@@ -75,8 +73,6 @@ advance_texture()
         llSetTexture(llList2Key(texture_list, texture_current), texture_face);
         fade_in();
 }
-
-
 
 default
 {
@@ -167,4 +163,3 @@ state idle
         check_for_new_textures(change);
     }
 }
-

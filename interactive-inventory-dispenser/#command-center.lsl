@@ -1,12 +1,4 @@
-// ===== Configuration section. Feel free to alter these settings ======//
-
-//  Set this to 1 if only owner and group should be served
-integer GROUP_ONLY_MODE=0;
-
-
-// ====== Script starts here, don't change anything beyond this line =======
 /*
-
     Script Name: Command Center
     
     Description: 
@@ -25,9 +17,15 @@ integer GROUP_ONLY_MODE=0;
     portions of the software.
     
     Version History:
-        10/01/2025: Initial 
-    
+        10/01/2025.1: Initial 
 */
+// ====== Configuration section. Feel free to alter these settings ======
+
+//  Set this to 1 if only owner and group should be served
+integer GROUP_ONLY_MODE=0;
+
+
+// ===== Script starts here, don't change anything beyond this line =====
 
 integer CHANNEL;
 integer GIVER_INITIALIZED=0;

@@ -1,18 +1,4 @@
-// ===== Configuration section. Feel free to alter these settings ======//
-
-//  minimum and maximum amount of meters on Z axis to detect (relative to sensor position)
-integer MAXZ = 20; 
-integer MINZ = 20; 
-
-// distance to detect in meter
-float RANGE = 25.0;
-
-// rate how often sensor should check for new visitors in seconds
-float RATE = 1.0; 
-
-// ====== Script starts here, don't change anything beyond this line =======
 /*
-
     Script Name: Sensor
     
     Description: 
@@ -29,22 +15,47 @@ float RATE = 1.0;
     portions of the software.
     
     Version History:
-        10/03/2025: Initial 
-    
+        10/03/2025.1: Initial 
 */
+// ====== Configuration section. Feel free to alter these settings ======
+
+//  minimum and maximum amount of meters on Z axis to detect (relative to sensor position)
+integer MAXZ = 20; 
+integer MINZ = 20; 
+
+// distance to detect in meter
+float RANGE = 25.0;
+
+// rate how often sensor should check for new visitors in seconds
+float RATE = 1.0; 
+
+// ===== Script starts here, don't change anything beyond this line =====
 
 list visitor_list; 
 list current_list; 
- 
 
 float maxZ = 0.0; 
 float minZ = 0; 
 
 list NOTOFICATION_QUEUE = [];
 
+string get_timestamp()
+{
+    // "YYYY-MM-DDThh:mm:ss.ff..fZ" to "MM-DD-YYYY hh:mm:ss"
+    list parsed_timestamp = llParseString2List(llGetTimestamp(),["-",":","."],["T"]); 
+    string formated_timestamp = "";
+    formated_timestamp += llList2String(parsed_timestamp, 1) + "-";
+    formated_timestamp += llList2String(parsed_timestamp, 2) + "-";
+    formated_timestamp += llList2String(parsed_timestamp, 0) + " ";
+    formated_timestamp += llList2String(parsed_timestamp, 4) + ":";
+    formated_timestamp += llList2String(parsed_timestamp, 5) + ":";
+    formated_timestamp += llList2String(parsed_timestamp, 6) + " UTC";
+    return formated_timestamp;
+}
+
 push_notification(string text) 
 { 
-    NOTOFICATION_QUEUE += text;
+    NOTOFICATION_QUEUE += text + " (" + get_timestamp() + ")";
     llMessageLinked(LINK_THIS,0, "NEW_NOTIFICATION", "");
 }
 

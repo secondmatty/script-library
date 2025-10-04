@@ -1,12 +1,4 @@
-// ===== Configuration section. Feel free to alter these settings ======//
-
-//  Set this to 1 if only owner and group should be served
-integer GROUP_ONLY_MODE=0;
-
-
-// ====== Script starts here, don't change anything beyond this line =======
 /*
-
     Script Name: Command Center
     
     Description: 
@@ -26,11 +18,18 @@ integer GROUP_ONLY_MODE=0;
     
     Version History:
         10/01/2025: Initial 
-    
 */
 
+// ====== Configuration section. Feel free to alter these settings ======
+
+//  Set this to TRUE if only owner and group should be served
+integer GROUP_ONLY_MODE=FALSE;
+
+
+// ===== Script starts here, don't change anything beyond this line =====
+
 integer CHANNEL;
-integer GIVER_INITIALIZED=0;
+integer GIVER_INITIALIZED=FALSE;
 
 initialize()
 {
@@ -44,7 +43,7 @@ initialize()
 update_initilization_status()
 {
     // notify user once all submodules are initialized
-    if (GIVER_INITIALIZED == 1)
+    if (GIVER_INITIALIZED == TRUE)
         llOwnerSay("Initialization finished.");
 }
 
@@ -66,7 +65,7 @@ default
     {
         if (GIVER_INITIALIZED!=1) return;
         key id = llDetectedKey(0);
-        if (GROUP_ONLY_MODE == 1) {
+        if (GROUP_ONLY_MODE == TRUE) {
             if (id == llGetOwner() || llSameGroup(id))
             {
                 llMessageLinked(LINK_THIS,0, "GIVE", id);
@@ -93,7 +92,7 @@ default
         if (str=="GIVER_FINISHED") 
         {
             // Item giver is done initializing.
-            GIVER_INITIALIZED = 1; 
+            GIVER_INITIALIZED = TRUE; 
             update_initilization_status();
         }
         else if (str=="reset_request") initialize();

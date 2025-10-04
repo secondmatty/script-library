@@ -1,12 +1,3 @@
-// ===== Configuration section. Feel free to alter these settings ======//
-
-// If you want to have multiple notecards with different sets of
-// stations in your radio you can use this variable to specify 
-// which one should be loaded
-string  RADIO_NOTECARD = "Stations";
-
-
-// ====== Script starts here, don't change anything beyond this line =======
 /*
 
     Script Name: awesome-radio/#media-center.lsl
@@ -28,6 +19,15 @@ string  RADIO_NOTECARD = "Stations";
         10/01/2025: Initial 
     
 */
+// ====== Configuration section. Feel free to alter these settings ======
+
+// If you want to have multiple notecards with different sets of
+// stations in your radio you can use this variable to specify 
+// which one should be loaded
+string  RADIO_NOTECARD = "Stations";
+
+
+// ===== Script starts here, don't change anything beyond this line =====
 
 string  SEPARATOR = "=";            // character to separate title from URL
 integer RADIO_CHANNEL;

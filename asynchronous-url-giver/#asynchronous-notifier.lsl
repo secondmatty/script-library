@@ -1,5 +1,4 @@
 /*
-
     Script Name: Notifier
     
     Description: 
@@ -15,8 +14,7 @@
     portions of the software.
     
     Version History:
-        10/03/2025: Initial 
-    
+        10/03/2025.1: Initial 
 */
 
 default
