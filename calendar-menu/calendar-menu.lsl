@@ -38,6 +38,10 @@ list TIMEZONES = ["America/Los_Angeles", "Europe/Berlin"];
 // Amount of seconds the dialog listener should be active
 float DIALOG_TIMEOUT = 60.0;
 
+// Additional text to be displayed
+string DIALOG_TEXT = "This menu provides links to the calendars of The Realm, FCC and the MELD 2025.";
+
+
 // ====== Script starts here, don't change anything beyond this line =======
 
 integer CHANNEL;
@@ -50,9 +54,15 @@ string CURRENT_TIMEZONE;
 
 show_dialog(key id)
 {
-    if (LISTEN_HANDLE == -1); LISTEN_HANDLE = llListen(CHANNEL, "", "", "");
+    string text = "";
+    if (DIALOG_TEXT != "") 
+    {
+        text += "\n" + DIALOG_TEXT + "\n";
+    }
+
+    if (LISTEN_HANDLE == -1) LISTEN_HANDLE = llListen(CHANNEL, "", "", "");
     llSetTimerEvent(DIALOG_TIMEOUT);
-    llDialog(id, "Current Timezone: "+ CURRENT_TIMEZONE_NAME, CALENDAR_MENU + TIMEZONE_NAMES , CHANNEL);
+    llDialog(id, text + "\n" + "Selected timezone: " + CURRENT_TIMEZONE_NAME, CALENDAR_MENU + TIMEZONE_NAMES , CHANNEL);
 }
 
 integer verify_configuration()
@@ -160,6 +170,7 @@ default
         if (LISTEN_HANDLE != -1)
         {
             llListenRemove(LISTEN_HANDLE);
+            LISTEN_HANDLE = -1;
             llSetTimerEvent(0.0);
         }
     }    
