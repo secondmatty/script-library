@@ -1,11 +1,16 @@
 /*
     Script Name: Floating Cube
-    
+
     Description: 
-    Let's a glowing cube appear in your hand. The scripts listens
-    on channel 5 for "show" and "hide" commands. The cube has no
+    Let's a glowing cube appear in your hand. The cube has no
     touch events, so it is perfect for adding your own interactive
     elements to it.
+
+    Instructions:
+    Upload standing.bvh animation, put script into a prim and apply
+    texture of your choice. Pick up prim and attach it to your right
+    hand. /5 show will trigger the animation and let the cube fade
+    in, /5 hide will hide the cube again and stop the animation.
     
     Copyright (c) 2025 Matt Briar, https://github.com/secondmatty
 
@@ -209,4 +214,3 @@ state show_cube
         }
     } 
 }
-
